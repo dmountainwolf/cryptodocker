@@ -1,11 +1,21 @@
 #!/bin/bash
 #
 #----------------------------------------------------------------------#
-#        name:  Dockerfile
-# description:  docker build for renos coin wallet daeomon, renosd
 #      author:  thebradfish
 #     twitter: 	@fleshwounded
 #     website: 	bradspodium.xyz
+#        name:  Dockerfile
+# description:  docker build for renos coin wallet daeomon, renosd
+#     funding:  if you find any of this useful, please consider tipping,
+#               and or donating, all funds are used to pay for virtual
+#				machines hosting various projects like this, thank you!
+#----------------------------------------------------------------------#
+#        excl:  EKQvE27DbGkTfEuvZ4wFpufdfp4M6gVMUZ
+#         rns:  RXtifjA6gnKanV4MLFsz7FBPWGEEFhab3s
+#		  chc:  Ca5yFQzYu3vEP9PCRBv6deqqqZFiqbEGXX
+#         ent:  EUd7C7uc8JUf3ibVrLRknusapsQpVBdMeB
+#         arc:  AXM3CwihR4Xoa63YiGBuuMiX8hkE43G7CT
+#         btc:  183mfMcQirWUQXD3wddzuYZPdd8ztKKjVZ
 #----------------------------------------------------------------------#
 
 FROM ubuntu:16.04
