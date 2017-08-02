@@ -2,17 +2,17 @@
 #
 #----------------------------------------------------------------------#
 #      author:  thebradfish
-#     twitter: 	@fleshwounded
-#     website: 	bradspodium.xyz
+#     twitter:  @fleshwounded
+#     website:  bradspodium.xyz
 #        name:  Dockerfile
 # description:  docker build for renos coin wallet daeomon, renosd
 #     funding:  if you find any of this useful, please consider tipping,
 #               and or donating, all funds are used to pay for virtual
-#				machines hosting various projects like this, thank you!
+#               machines hosting various projects like this, thank you!
 #----------------------------------------------------------------------#
 #        excl:  EKQvE27DbGkTfEuvZ4wFpufdfp4M6gVMUZ
 #         rns:  RXtifjA6gnKanV4MLFsz7FBPWGEEFhab3s
-#		  chc:  Ca5yFQzYu3vEP9PCRBv6deqqqZFiqbEGXX
+#                 chc:  Ca5yFQzYu3vEP9PCRBv6deqqqZFiqbEGXX
 #         ent:  EUd7C7uc8JUf3ibVrLRknusapsQpVBdMeB
 #         arc:  AXM3CwihR4Xoa63YiGBuuMiX8hkE43G7CT
 #         btc:  183mfMcQirWUQXD3wddzuYZPdd8ztKKjVZ
@@ -23,7 +23,6 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN export DEBIAN_FRONTEND=noninteractive
 
-ENV HOME /src
 WORKDIR /src/wallets
 
 RUN apt-get update
@@ -57,15 +56,15 @@ RUN sudo apt-get install -y nano
 
 #Download the wallet sourcecode
 RUN sudo git clone https://github.com/RenosCoin/RenosCoin.git
-RUN sudo cd RenosCoin/src && sudo rm -rf secp256k1
-RUN sudo cd RenosCoin/src && sudo git clone https://github.com/bitcoin-core/secp256k1.git 
-RUN sudo cd RenosCoin/src/secp256k1 && sudo ./autogen.sh && sudo ./configure && sudo make && sudo make install
-RUN sudo cp /usr/local/lib/libsecp256k1.* /usr/lib
-RUN sudo cp RenosCoin/src/crypto RenosCoin/src/obj/crypto -rR
+RUN cd RenosCoin/src && sudo rm -rf secp256k1
+RUN cd RenosCoin/src && sudo git clone https://github.com/bitcoin-core/secp256k1.git secp256k1
+RUN cd RenosCoin/src/secp256k1 && sudo ./autogen.sh && sudo ./configure && sudo make && sudo make install
+RUN cp /usr/local/lib/libsecp256k1.* /usr/lib
+RUN cp RenosCoin/src/crypto RenosCoin/src/obj/crypto -rR
 RUN sudo chmod 755 RenosCoin/src/leveldb/*
 
 RUN cd RenosCoin/src && sudo make -f makefile.unix USE_UPNP=0
-RUN cd RenosCoin && sudo mkdir bin && sudo mv src/RenosCoin bin/
+RUN sudo mkdir bin && sudo mv RenosCoin/src/renosd bin/
 RUN cd RenosCoin/src && sudo make -f makefile.unix clean
 
 #Cleanup
