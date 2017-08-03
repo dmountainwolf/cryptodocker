@@ -51,8 +51,8 @@ RUN sudo add-apt-repository ppa:bitcoin/bitcoin -y
 RUN sudo apt-get update
 RUN sudo apt-get install -y libdb4.8-dev libdb4.8++-dev -y
 
-#Install nano because you know you like it more then Vim
-RUN sudo apt-get install -y nano
+#Install nano because you know you like it more then Vim & we need wget
+RUN sudo apt-get install -y nano wget
 
 #Download the wallet sourcecode
 RUN sudo git clone https://github.com/RenosCoin/RenosCoin.git
