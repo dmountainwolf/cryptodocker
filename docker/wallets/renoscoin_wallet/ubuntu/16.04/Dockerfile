@@ -66,7 +66,14 @@ RUN sudo chmod 755 RenosCoin/src/leveldb/*
 RUN cd RenosCoin/src && sudo make -f makefile.unix USE_UPNP=0
 RUN sudo mkdir bin && sudo mv RenosCoin/src/renosd bin/
 RUN cd RenosCoin/src && sudo make -f makefile.unix clean
+RUN sudo mkdir ~/.renoscoin
+RUN sudo echo -e "rpcuser=RenosRPC.`openssl rand -base64 8` \nrpcpassword=`openssl rand -base64 32` \nrpcallowip=127.0.0.1 \nstaking=1 \nport=57155 \nserver=1 \nlisten=1 \ndaemon=1 " > ~/.renoscoin/renos.conf
+RUN sudo wget https://raw.githubusercontent.com/thebradfish/cryptodocker/master/bash/build/wallets/renoscoin_addnodes.txt && cat renoscoin_addnodes.txt >> ~/.renoscoin/renos.conf
 
 #Cleanup
 RUN sudo apt-get autoremove -y
 RUN sudo apt-get purge -y
+
+#RUN
+
+CMD /src/wallets/RenosCoin/bin/renosd -daemon
